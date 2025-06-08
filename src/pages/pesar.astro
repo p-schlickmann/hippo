@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <div style="display: flex; align-items: flex-start;margin: 10px; height: 70%">
+        <table style="border-collapse: collapse; width: 60%;">
+            <thead>
+            <tr>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Quantidade</th>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Preço</th>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Produto</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style="border: 1px solid #000; padding: 8px;">1</td>
+                <td style="border: 1px solid #000; padding: 8px;">R$5,99</td>
+                <td style="border: 1px solid #000; padding: 8px;">Leite Longa Vida Italac 1L</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 8px;">2</td>
+                <td style="border: 1px solid #000; padding: 8px;">R$3,50</td>
+                <td style="border: 1px solid #000; padding: 8px;">Pão Francês (unidade)</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 8px;">1</td>
+                <td style="border: 1px solid #000; padding: 8px;">R$8,99</td>
+                <td style="border: 1px solid #000; padding: 8px;">Café Pilão 250g</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 8px;">1</td>
+                <td style="border: 1px solid #000; padding: 8px;">R$5,99</td>
+                <td style="border: 1px solid #000; padding: 8px;">Iogurte Nestlé Morango 170g</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 8px; font-weight: bold;" colspan="1">Total</td>
+                <td style="border: 1px solid #000; padding: 8px; font-weight: bold;">R$29,97</td>
+                <td style="border: 1px solid #000; padding: 8px;"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="margin: 30px; width: 40%; margin-top: 0px;">
+            <img src="./barcode-png.webp" style="width: 100%"/>
+            <h2 style="font-size: 40px; text-align: center; font-weight: 500">
+                Passe o produto pelo leitor
+            </h2>
+            <div style="display: flex; align-items: center; justify-content: space-between; border: 1px solid black; padding: 20px; border-radius: 20px; position: relative; gap: 10px; margin-top: 60px">
+                <div style="width: 100%; display: flex; justify-content: center; position: absolute; top: -52px; left: -1px">
+                    <h3 style="font-weight: 500; margin-top: 40px;  background-color: #f0f0f0; padding: 0px 10px">Produtos especiais</h3>
+                </div>
+                <a class="button" href="/hortifruti" style="padding: 10px 10px">
+                    <i class="fa-solid fa-apple-whole" style="margin-right: 4px;"></i>
+                    Hortifruti
+                </a>
+                <a class="button" href="/produto-grande" style="padding: 10px 10px">
+                    <i class="fa-solid fa-plus" style="margin-right: 4px;"></i>
+                    Grande
+                </a>
+                <a class="button" href="/codigo" style="padding: 10px 10px">
+                    <i class="fa-solid fa-barcode" style="margin-right: 4px;"></i>
+                    Código
+                </a>
+            </div>
+        </div>
+    </div>
+    <div style="height: 30%; background: #5C0A00; display: flex; justify-content: space-between; padding: 30px">
+        <div>
+            <img src='./hippo.png' alt="logo" style="height: 120px;"/>
+            <a class="button" href="/chamar" style="padding: 10px 20px; font-size: 20px">
+                <i class="fa-solid fa-bell" style="margin-right: 10px"></i>
+                Chamar Funcionário
+            </a>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px">
+            <a class="button" href="/pagamento" style="padding: 10px 20px; font-size: 30px; width: 100%">
+                <i class="fa-solid fa-dollar-sign" style="margin-right: 10px"></i>
+                Pagamento
+            </a>
+            <a class="button" href="/cancelar" style="padding: 10px 20px; font-size: 30px; background: #dbdbdb">
+                <i class="fa-solid fa-xmark" style="margin-right: 10px"></i>
+                Cancelar Compra
+            </a>
+        </div>
+    </div>
+</Layout>
