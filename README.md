@@ -1,4 +1,4 @@
-# Hippo
+# Grupo A - Hippo
 Protótipo de alta fidelidade para as melhorias de usabilidades propostas na disciplina **INE5624 - Engenharia de Usabilidade**
 
 ## Instruções para rodar o projeto
@@ -6,3 +6,8 @@ Protótipo de alta fidelidade para as melhorias de usabilidades propostas na dis
 2. Abrir o terminal (linha de comando) na pasta principal do projeto `hippo`
 3. Rodar os comandos `npm install -g yarn && yarn install && yarn dev`
 4. Abrir o endereço http://localhost:4321 no seu navegador de preferência.
+
+### Integrantes do grupo
+- Lucas Costa Valença (19200430) 
+- Julio Gonçalves Ramos (19203165) 
+- Pedro Schlickmann Mendes (20200635)
