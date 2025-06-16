@@ -116,13 +116,14 @@ import Fruits from '../components/Fruits.astro';
     let rowToBeRemoved;
     let selectedFruit;
     let paying = false;
+    let waitingForFruit = false;
 
     const msg = {
         initial: "Passe o produto pelo leitor",
         waiting: "Coloque o produto na balança de saida...",
         removing: "Remova os produtos da balança...",
         callingEmployee: "Chamando funcionário ...",
-        fruit: "Produto Hortifruti <br/><br/> Coloque a sacola na balança especial...",
+        waitingFruit: "Produto Hortifruti <br/><br/> Coloque a sacola na balança hortifruti...",
         paying: "Selecione a forma de pagamento abaixo",
         cardPayment: "Efetue o pagamento na maquininha...",
         pixPayment: "Efetue o pix...",
@@ -180,6 +181,7 @@ import Fruits from '../components/Fruits.astro';
     const isWaiting = () => code || rowToBeRemoved || selectedFruit
 
     const resetState = () => {
+        waitingForFruit = false;
         paying = false;
         rowToBeRemoved = undefined;
         code = undefined;
@@ -227,6 +229,10 @@ import Fruits from '../components/Fruits.astro';
             } else if (paying) {
                 window.location.href = '/obrigado'
                 return
+            } else if (waitingForFruit) {
+                document.querySelector("#header").style.display = 'none'
+                document.querySelector("#footer").style.display = 'none'
+                document.querySelector("#fruits").style.display = 'block'
             } else {
                 return;
             }
@@ -268,10 +274,10 @@ import Fruits from '../components/Fruits.astro';
 
     document.querySelector("#open-fruits").addEventListener("click", () => {
         if (isWaiting()) return alert("Termine a pesagem do produto atual.");
-
-        document.querySelector("#header").style.display = 'none'
-        document.querySelector("#footer").style.display = 'none'
-        document.querySelector("#fruits").style.display = 'flex'
+        setTitle(msg.waitingFruit)
+        setBarCodeVisibility('hidden')
+        waitingForFruit = true;
+        showCancelButton()
     })
 
     document.querySelectorAll('.fruit-card').forEach((card) => {
@@ -280,8 +286,9 @@ import Fruits from '../components/Fruits.astro';
             document.querySelector("#header").style.display = 'flex'
             document.querySelector("#footer").style.display = 'flex'
             document.querySelector("#fruits").style.display = 'none'
-            setTitle(msg.fruit)
+            setTitle(`Coloque a sacola de ${selectedFruit.name}s na balança de saída...`)
             document.querySelector("#barcode").style.display = 'none'
+            document.querySelector("#products-div").style.display = 'none'
         });
     });
     document.querySelector("#cancel-last-action").addEventListener('click', () => {
