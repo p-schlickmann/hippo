@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80vh; text-align: center;">
+        <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">
+            Obrigado, volte sempre!
+        </h1>
+        <p style="font-size: 24px;">Compra finalizada,<br />o caixa reiniciará automaticamente em breve.</p>
+    </div>
+
+    <script type="module">
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 7500);
+    </script>
+</Layout>

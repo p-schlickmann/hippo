@@ -1,86 +1,319 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Fruits from '../components/Fruits.astro';
+
 ---
 
 <Layout>
-    <div style="display: flex; align-items: flex-start;margin: 10px; height: 70%">
+    <div id="header" style="display: flex; align-items: flex-start;margin: 10px; height: 70%">
         <table style="border-collapse: collapse; width: 60%;">
             <thead>
             <tr>
-                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Quantidade</th>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Qtd</th>
                 <th style="border: 1px solid #000; padding: 8px; text-align: left;">Preço</th>
                 <th style="border: 1px solid #000; padding: 8px; text-align: left;">Produto</th>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;"></th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td style="border: 1px solid #000; padding: 8px;">1</td>
-                <td style="border: 1px solid #000; padding: 8px;">R$5,99</td>
-                <td style="border: 1px solid #000; padding: 8px;">Leite Longa Vida Italac 1L</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #000; padding: 8px;">2</td>
-                <td style="border: 1px solid #000; padding: 8px;">R$3,50</td>
-                <td style="border: 1px solid #000; padding: 8px;">Pão Francês (unidade)</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #000; padding: 8px;">1</td>
-                <td style="border: 1px solid #000; padding: 8px;">R$8,99</td>
-                <td style="border: 1px solid #000; padding: 8px;">Café Pilão 250g</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #000; padding: 8px;">1</td>
-                <td style="border: 1px solid #000; padding: 8px;">R$5,99</td>
-                <td style="border: 1px solid #000; padding: 8px;">Iogurte Nestlé Morango 170g</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #000; padding: 8px; font-weight: bold;" colspan="1">Total</td>
-                <td style="border: 1px solid #000; padding: 8px; font-weight: bold;">R$29,97</td>
-                <td style="border: 1px solid #000; padding: 8px;"></td>
-            </tr>
+            <tbody id="products-tbody">
             </tbody>
         </table>
-        <div style="margin: 30px; width: 40%; margin-top: 0px;">
-            <img src="./barcode-png.webp" style="width: 100%"/>
-            <h2 style="font-size: 40px; text-align: center; font-weight: 500">
+        <div style="margin: 30px; width: 40%; margin-top: 0px; position: relative;">
+            <img src="./barcode-png.webp" id="barcode" style="width: 100%"/>
+            <div id="calling-employee-icon" style="visibility: hidden; position: absolute; top: 100px; width: 100%; display: flex; justify-content: center">
+                <i class="fa-solid fa-user" style="font-size: 40px; "></i>
+            </div>
+            <h2 id="current-state-title" style="font-size: 40px; text-align: center; font-weight: 500">
                 Passe o produto pelo leitor
             </h2>
-            <div style="display: flex; align-items: center; justify-content: space-between; border: 1px solid black; padding: 20px; border-radius: 20px; position: relative; gap: 10px; margin-top: 60px">
+
+            <div id="employee-present-div" style="display: none; width: 100%; justify-content: center">
+                <a class="button" id="employee-present-button" style="padding: 10px 10px">
+                    <i class="fa-solid fa-check" style="margin-right: 4px;"></i>
+                    Funcionario Presente
+                </a>
+            </div>
+
+            <div id="payment-div" style="display: none; align-items: center; justify-content: space-between; border: 1px solid black; padding: 20px; border-radius: 20px; position: relative; gap: 10px; margin-top: 60px">
+                <div style="width: 100%; display: flex; justify-content: center; position: absolute; top: -52px; left: -1px">
+                    <h3 id="payment-total" style="font-weight: 500; margin-top: 40px;  background-color: #f0f0f0; padding: 0px 10px"></h3>
+                </div>
+                <a class="button" id="open-pix" style="padding: 15px 30px">
+                    PIX
+                </a>
+                <a class="button open-payment-card" style="padding: 15px 30px">
+                    Crédito
+                </a>
+                <a class="button open-payment-card" style="padding: 15px 30px">
+                    Débito
+                </a>
+            </div>
+
+            <div id="products-div" style="display: flex; align-items: center; justify-content: space-between; border: 1px solid black; padding: 20px; border-radius: 20px; position: relative; gap: 10px; margin-top: 60px">
                 <div style="width: 100%; display: flex; justify-content: center; position: absolute; top: -52px; left: -1px">
                     <h3 style="font-weight: 500; margin-top: 40px;  background-color: #f0f0f0; padding: 0px 10px">Produtos especiais</h3>
                 </div>
-                <a class="button" href="/hortifruti" style="padding: 10px 10px">
+                <a class="button" id="open-fruits" style="padding: 10px 10px">
                     <i class="fa-solid fa-apple-whole" style="margin-right: 4px;"></i>
                     Hortifruti
                 </a>
-                <a class="button" href="/produto-grande" style="padding: 10px 10px">
+                <a class="button input-code" style="padding: 10px 10px">
                     <i class="fa-solid fa-plus" style="margin-right: 4px;"></i>
                     Grande
                 </a>
-                <a class="button" href="/codigo" style="padding: 10px 10px">
+                <a class="button input-code" style="padding: 10px 10px">
                     <i class="fa-solid fa-barcode" style="margin-right: 4px;"></i>
                     Código
                 </a>
             </div>
         </div>
     </div>
-    <div style="height: 30%; background: #5C0A00; display: flex; justify-content: space-between; padding: 30px">
+    <div id="footer" style="height: 30%; background: #5C0A00; display: flex; justify-content: space-between; padding: 30px">
         <div>
             <img src='./hippo.png' alt="logo" style="height: 120px;"/>
-            <a class="button" href="/chamar" style="padding: 10px 20px; font-size: 20px">
+            <a class="button" id="call-employee" style="padding: 10px 20px; font-size: 20px">
                 <i class="fa-solid fa-bell" style="margin-right: 10px"></i>
                 Chamar Funcionário
             </a>
         </div>
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px">
-            <a class="button" href="/pagamento" style="padding: 10px 20px; font-size: 30px; width: 100%">
+            <a class="button" id="initiate-purchase" style="padding: 10px 20px; font-size: 30px; width: 100%">
                 <i class="fa-solid fa-dollar-sign" style="margin-right: 10px"></i>
                 Pagamento
             </a>
-            <a class="button" href="/cancelar" style="padding: 10px 20px; font-size: 30px; background: #dbdbdb">
+            <a class="button" id="cancel-purchase" style="padding: 10px 20px; font-size: 30px; background: #dbdbdb">
                 <i class="fa-solid fa-xmark" style="margin-right: 10px"></i>
                 Cancelar Compra
             </a>
+            <a class="button" id="cancel-last-action" style="display: none; padding: 20px 40px; font-size: 40px; background: #dbdbdb">
+                Cancelar
+            </a>
         </div>
     </div>
+    <Fruits />
 </Layout>
+
+<script>
+    const productList = [
+        { name: "Leite Longa Vida Italac 1L", price: "5.99" },
+        { name: "Arroz Tipo 1 5kg", price: "19.89" },
+        { name: "Feijão Carioca 1kg", price: "6.49" },
+        { name: "Óleo de Soja 900ml", price: "4.79" },
+        { name: "Macarrão Espaguete 500g", price: "3.29" },
+        { name: "Açúcar Cristal 1kg", price: "3.99" },
+        { name: "Farinha de Trigo 1kg", price: "4.29" },
+        { name: "Café Torrado e Moído 500g", price: "10.49" },
+        { name: "Sabonete Neutro", price: "2.19" },
+        { name: "Papel Higiênico 12 rolos", price: "14.99" }
+    ];
+
+    const getRandomProduct = () => {
+        const index = Math.floor(Math.random() * productList.length);
+        return productList[index];
+    }
+
+    let code;
+    let rowToBeRemoved;
+    let selectedFruit;
+    let paying = false;
+
+    const msg = {
+        initial: "Passe o produto pelo leitor",
+        waiting: "Coloque o produto na balança de saida...",
+        removing: "Remova os produtos da balança...",
+        callingEmployee: "Chamando funcionário ...",
+        fruit: "Produto Hortifruti <br/><br/> Coloque a sacola na balança especial...",
+        paying: "Selecione a forma de pagamento abaixo",
+        cardPayment: "Efetue o pagamento na maquininha...",
+        pixPayment: "Efetue o pix...",
+    }
+
+    const setTitle = (title) => document.querySelector("#current-state-title").innerHTML = title
+    const setBarCodeVisibility = (visibility) => document.querySelector("#barcode").style.visibility = visibility
+
+    const createRow = (name, price) => {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+        <td style="border: 1px solid #000; padding: 8px;">1</td>
+        <td class="row-price" style="border: 1px solid #000; padding: 8px;">R$${price}</td>
+        <td style="border: 1px solid #000; padding: 8px;">${name}</td>
+        <td style="border: 1px solid #000; padding: 8px;">
+            <button class="remove-button" style="cursor:pointer;">X</button>
+        </td>
+    `;
+
+        newRow.querySelector(".remove-button").addEventListener("click", () => {
+            if (isWaiting()) return alert("Termine a pesagem do produto atual.");
+            setTitle(msg.removing)
+            setBarCodeVisibility('hidden')
+            rowToBeRemoved = newRow
+        });
+
+        return newRow;
+    };
+
+
+    const createTotalRow = () => {
+        const totalPrice = Array.from(document.querySelectorAll(".row-price"))
+          .reduce((sum, el) => {
+              const value = parseFloat(el.textContent.replace(",", ".").replace(/[^\d.]/g, ""));
+              return sum + (isNaN(value) ? 0 : value);
+          }, 0);
+
+        const totalRow = document.createElement("tr")
+        totalRow.id = "total-row"
+        totalRow.innerHTML = `
+            <td style="border: 1px solid #000; padding: 8px; font-weight: bold;" colspan="1">Total</td>
+            <td style="border: 1px solid #000; padding: 8px; font-weight: bold;">R$${totalPrice.toFixed(2)}</td>
+            <td style="border: 1px solid #000; padding: 8px;"></td>
+            <td style="border: 1px solid #000; padding: 8px;"></td>
+        `
+        document.querySelector("#payment-total").innerHTML = `Total: R$${totalPrice.toFixed(2)}`
+
+        return totalRow
+    }
+
+    const appendRowToHtml = (row) => {
+        document.querySelector("#products-tbody").appendChild(row)
+    }
+
+    const isWaiting = () => code || rowToBeRemoved || selectedFruit
+
+    const resetState = () => {
+        paying = false;
+        rowToBeRemoved = undefined;
+        code = undefined;
+        selectedFruit = undefined;
+
+        setTitle(msg.initial)
+        setBarCodeVisibility('visible')
+        document.querySelector("#initiate-purchase").style.display = 'block'
+        document.querySelector("#cancel-purchase").style.display = 'block'
+        document.querySelector("#cancel-last-action").style.display = 'none'
+        document.querySelector("#calling-employee-icon").style.visibility = 'hidden'
+        document.querySelector("#products-div").style.display = 'flex'
+        document.querySelector("#employee-present-div").style.display = 'none'
+        document.querySelector("#products-div").style.display = 'flex'
+        document.querySelector("#payment-div").style.display = 'none'
+    }
+
+    const showCancelButton = () => {
+        document.querySelector("#initiate-purchase").style.display = 'none'
+        document.querySelector("#cancel-purchase").style.display = 'none'
+        document.querySelector("#cancel-last-action").style.display = 'block'
+    }
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            if (code) {
+                const randomProduct = getRandomProduct();
+                // add new row and recalculate total
+                const row = createRow(randomProduct.name, randomProduct.price)
+                appendRowToHtml(row)
+                document.querySelector("#total-row")?.remove()
+                appendRowToHtml(createTotalRow())
+            } else if (rowToBeRemoved) {
+                rowToBeRemoved.remove();
+                document.querySelector("#total-row")?.remove();
+                if (document.querySelector(".row-price")) {
+                    appendRowToHtml(createTotalRow());
+                }
+            } else if (selectedFruit) {
+                const row = createRow(selectedFruit.name, selectedFruit.price)
+                appendRowToHtml(row)
+                document.querySelector("#total-row")?.remove()
+                appendRowToHtml(createTotalRow())
+                document.querySelector("#barcode").style.display = 'block'
+            } else if (paying) {
+                window.location.href = '/obrigado'
+                return
+            } else {
+                return;
+            }
+
+            resetState()
+        }
+    });
+
+    Array.from(document.querySelectorAll('.input-code')).forEach(element => {
+        element.addEventListener('click', () => {
+            if (isWaiting()) return alert("Termine a pesagem do produto atual.");
+            code = prompt("Insira o codigo:")
+            if (code) {
+                setTitle(msg.waiting)
+                setBarCodeVisibility('hidden')
+            }
+        })
+    })
+
+    document.querySelector("#call-employee").addEventListener("click", () => {
+        setTitle(msg.callingEmployee)
+        setBarCodeVisibility('hidden')
+
+        document.querySelector("#calling-employee-icon").style.visibility = 'visible'
+        document.querySelector("#products-div").style.display = 'none'
+        document.querySelector("#employee-present-div").style.display = 'flex'
+        showCancelButton()
+    })
+
+    document.querySelector("#employee-present-button").addEventListener('click', () => {
+        resetState()
+    })
+
+    document.querySelector("#cancel-purchase").addEventListener("click", () => {
+        if (confirm("Tem certeza que deseja cancelar sua compra?")) {
+            window.location.href = '/'
+        }
+    })
+
+    document.querySelector("#open-fruits").addEventListener("click", () => {
+        if (isWaiting()) return alert("Termine a pesagem do produto atual.");
+
+        document.querySelector("#header").style.display = 'none'
+        document.querySelector("#footer").style.display = 'none'
+        document.querySelector("#fruits").style.display = 'flex'
+    })
+
+    document.querySelectorAll('.fruit-card').forEach((card) => {
+        card.addEventListener('click', () => {
+            selectedFruit = {name: card.dataset.fruitName, price: card.dataset.fruitPrice}
+            document.querySelector("#header").style.display = 'flex'
+            document.querySelector("#footer").style.display = 'flex'
+            document.querySelector("#fruits").style.display = 'none'
+            setTitle(msg.fruit)
+            document.querySelector("#barcode").style.display = 'none'
+        });
+    });
+    document.querySelector("#cancel-last-action").addEventListener('click', () => {
+        resetState()
+    })
+
+    document.querySelector("#initiate-purchase").addEventListener('click', () => {
+        if (isWaiting()) return alert("Termine a pesagem do produto atual.");
+        if (!document.querySelector(".row-price")) return alert("Nenhum produto incluído.")
+        setTitle(msg.paying)
+        setBarCodeVisibility('hidden')
+        document.querySelector("#products-div").style.display = 'none'
+        document.querySelector("#payment-div").style.display = 'flex'
+        showCancelButton()
+    })
+
+    Array.from(document.querySelectorAll('.open-payment-card')).forEach(element => {
+        element.addEventListener('click', () => {
+            if (isWaiting()) return alert("Termine a pesagem do produto atual.");
+
+            setTitle(msg.cardPayment)
+            document.querySelector("#payment-div").style.display = 'none'
+            paying = true;
+        })
+    })
+
+    document.querySelector('#open-pix').addEventListener('click', () => {
+        if (isWaiting()) return alert("Termine a pesagem do produto atual.");
+
+        setTitle(msg.pixPayment)
+        document.querySelector("#payment-div").style.display = 'none'
+        paying = true;
+    })
+
+</script>
