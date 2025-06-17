@@ -70,8 +70,8 @@ import Fruits from '../components/Fruits.astro';
     </div>
     <div id="footer" style="height: 30%; background: #5C0A00; display: flex; justify-content: space-between; padding: 30px">
         <div>
-            <img src='./hippo.png' alt="logo" style="height: 120px;"/>
-            <a class="button" id="call-employee" style="padding: 10px 20px; font-size: 20px">
+            <img src='./hippo.png' alt="logo" style="height: 120px"/>
+            <a class="button" id="call-employee" style="padding: 10px 20px; font-size: 20px;">
                 <i class="fa-solid fa-bell" style="margin-right: 10px"></i>
                 Chamar Funcionário
             </a>
@@ -92,6 +92,15 @@ import Fruits from '../components/Fruits.astro';
     </div>
     <Fruits />
 </Layout>
+
+<style is:global>
+    @media (max-height: 740px) {
+        #footer {
+            padding: 0px 30px!important;
+            height: 35%!important;
+        }
+    }
+</style>
 
 <script>
     const productList = [
@@ -197,6 +206,7 @@ import Fruits from '../components/Fruits.astro';
         document.querySelector("#employee-present-div").style.display = 'none'
         document.querySelector("#products-div").style.display = 'flex'
         document.querySelector("#payment-div").style.display = 'none'
+        document.querySelector("#barcode").style.display = 'block'
     }
 
     const showCancelButton = () => {
@@ -275,7 +285,7 @@ import Fruits from '../components/Fruits.astro';
     document.querySelector("#open-fruits").addEventListener("click", () => {
         if (isWaiting()) return alert("Termine a pesagem do produto atual.");
         setTitle(msg.waitingFruit)
-        setBarCodeVisibility('hidden')
+        document.querySelector("#barcode").style.display = 'none'
         waitingForFruit = true;
         showCancelButton()
     })
